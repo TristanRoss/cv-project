@@ -25,9 +25,9 @@ export class App extends Component {
 
     return (
       <div>
+
         { this.state.showForm && (<FormInfo buttonStyle={buttonStyle} handleClick={this.handleClick}></FormInfo>) }
-        { !this.state.showForm && (<Button style={buttonStyle} color="primary" onClick={this.handleClick}>Enter information</Button>) }
-        
+        { !this.state.showForm && (<Button style={buttonStyle} color="primary" onClick={this.handleClick}>Enter information</Button>)}
       </div>
     )
   }

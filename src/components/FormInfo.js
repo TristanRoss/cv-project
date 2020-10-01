@@ -42,7 +42,6 @@ export class FormInfo extends Component {
     })
   }
 
-
   render() {
 
     const formStyle = {
