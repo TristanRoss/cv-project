@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { FormGroup, Label, Input } from 'reactstrap';
-
+import { Button, FormGroup, Label, Input } from 'reactstrap';
+import BulletPoint from './BulletPoint';
 
 export class Job extends Component {
 
@@ -9,32 +9,69 @@ export class Job extends Component {
   
 
     this.state = {
-      school: "",
-      degree: "",
-      date: "",
+      company: "",
+      title: "",
+      startDate: "",
+      endDate: "",
+      numBullets: 1
     }
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.addBulletPoint = this.addBulletPoint.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  addBulletPoint() {
+    this.setState({
+      numBullets: this.state.numBullets + 1,
+    })
   }
 
   
   render() {
+
+    const bulletPoints = [];
+
+    for (let i = 0; i < this.state.numBullets; i++) {
+      bulletPoints.push(<BulletPoint key={i} number={i + 1}></BulletPoint>)
+    }
+
+
     return (
       <div>
-        <h2 style={this.props.headerStyle}>{'Education ' + this.props.number}</h2>
+        <h2 style={this.props.headerStyle}>{'Work Experience ' + this.props.number}</h2>
           <FormGroup>
-            <Label for="school">School</Label>
-            <Input type="text" name="school" value={this.state.school} onChange={this.props.handleInputChange}/>
+            <Label for="company">Company</Label>
+            <Input type="text" name="company" value={this.state.company} onChange={this.handleInputChange}/>
           </FormGroup>
           <FormGroup>
-            <Label for="degree">Degree</Label>
-            <Input type="text" name="degree" value={this.state.degree} onChange={this.props.handleInputChange}/>
+            <Label for="title">Title</Label>
+            <Input type="text" name="title" value={this.state.title} onChange={this.handleInputChange}/>
           </FormGroup>
           <FormGroup>
-            <Label for="date">Date</Label>
-            <Input type="text" name="date" value={this.state.date} onChange={this.props.handleInputChange}/>
+            <Label for="startDate">Start Date</Label>
+            <Input type="text" name="startDate" value={this.state.startDate} onChange={this.handleInputChange}/>
           </FormGroup>
+          <FormGroup>
+            <Label for="endDate">End Date</Label>
+            <Input type="text" name="endDate" value={this.state.endDate} onChange={this.handleInputChange}/>
+          </FormGroup>
+          <div>
+            {bulletPoints}
+          </div>
+          <Button outline color="primary" onClick={this.addBulletPoint}>Add Bullet Point (optional)</Button>
       </div>
     )
   }
 }
 
-export default Education
+export default Job

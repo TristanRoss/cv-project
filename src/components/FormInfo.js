@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import Education from './Education';
+import Job from './Job';
 
 export class FormInfo extends Component {
   constructor(props) {
@@ -10,11 +11,13 @@ export class FormInfo extends Component {
       name: "",
       email: "",
       phone: "",
-      numEducation: 1,
+      numEducations: 1,
+      numJobs: 1,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.addEducation = this.addEducation.bind(this);
+    this.addJob = this.addJob.bind(this);
   }
 
   handleInputChange(event) {
@@ -28,11 +31,17 @@ export class FormInfo extends Component {
   }
 
   addEducation() {
-    console.log(this.state.numEducation);
     this.setState({
-      numEducation: this.state.numEducation + 1,
+      numEducations: this.state.numEducations + 1,
     })
   }
+
+  addJob() {
+    this.setState({
+      numJobs: this.state.numJobs + 1,
+    })
+  }
+
 
   render() {
 
@@ -48,20 +57,30 @@ export class FormInfo extends Component {
       marginTop: "20px",
     }
 
+    const jobButtonStyle = {
+      marginTop: "30px",
+    }
+
     const headerOneStyle = {
       borderBottom: "1px solid #dbdbdb",
     }
 
     const headerStyle = {
       fontSize: "20px",
-      paddingTop: "20px",
-      paddingBottom: "10px",
+      marginTop: "60px",
+      marginBottom: "10px",
     }
 
     const educations = [];
 
-    for (let i = 0; i < this.state.numEducation; i++) {
-      educations.push(<Education key={i} number={i + 1} headerStyle={headerStyle} handleInputChange={this.handleInputChange}></Education>)
+    for (let i = 0; i < this.state.numEducations; i++) {
+      educations.push(<Education key={i} number={i + 1} headerStyle={headerStyle}></Education>)
+    }
+
+    const jobs = [];
+
+    for (let i = 0; i < this.state.numJobs; i++) {
+      jobs.push(<Job key={i} number={i + 1} headerStyle={headerStyle}></Job>)
     }
 
     return (
@@ -84,10 +103,14 @@ export class FormInfo extends Component {
           <div>
             {educations}
           </div>
-          <Button color="primary" onClick={this.addEducation}>Add Education (optional)</Button>
-          
-        
-          <Button style={buttonStyle} color="primary">Submit</Button>
+          <Button outline color="primary" onClick={this.addEducation}>Add Education (optional)</Button>
+          <div>
+            {jobs}
+          </div>
+          <Button outline color="primary" style={jobButtonStyle} onClick={this.addJob}>Add Job (optional)</Button>
+          <div>
+            <Button style={buttonStyle} color="primary">Submit</Button>
+          </div>
         </Form>
       </div>
     )
