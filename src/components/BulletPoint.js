@@ -20,11 +20,11 @@ export class BulletPoint extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-
     this.setState({
       [name]: value
+    }, () => {
+      this.props.hIC(this.state);
     });
-    this.props.hIC(this.state);
   }
 
   
@@ -33,7 +33,7 @@ export class BulletPoint extends Component {
       <div>
           <FormGroup>
             <Label for="bulletPoint">{'Bullet Point ' + this.props.number}</Label>
-            <Input type="text" name="bulletPoint" value={this.state.text} onChange={this.handleInputChange}/>
+            <Input type="text" name="bulletPoint" value={this.state.bulletPoint} onChange={this.handleInputChange}/>
           </FormGroup>
       </div>
     )

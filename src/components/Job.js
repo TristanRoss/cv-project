@@ -24,10 +24,13 @@ export class Job extends Component {
 
   handleInputChange(event) {
     if (event.hasOwnProperty('bulletPoint')) {
+      
       const bullets = this.state.bulletPoints.slice();
       bullets[event.key] = event;
       this.setState({
         bulletPoints: bullets 
+      }, () => {
+        this.props.hIC(this.state);
       });
     } else {
       const target = event.target;
@@ -36,9 +39,10 @@ export class Job extends Component {
 
       this.setState({
         [name]: value
+      }, () => {
+        this.props.hIC(this.state);
       });
     }
-    this.props.hIC(this.state);
   }
 
   addBulletPoint() {

@@ -59,7 +59,6 @@ export class App extends Component {
 
 
   render() {
-
     const buttonStyle = {
       margin: "10px",
     }
@@ -70,12 +69,64 @@ export class App extends Component {
       textAlign: "center",
     }
 
+    const cvStyle = {
+      width: "900px",
+      margin: "50px auto",
+      border: "1px solid #dbdbdb",
+      borderRadius: "1px",
+      padding: "20px"
+    }
+
+    const educations = [];
+    const jobs = [];
+    if (this.state.hasOwnProperty("obj")) {
+      if (this.state.obj.hasOwnProperty("numEducations")) {
+        educations.push(<h2 key={0} style={{fontSize: "28px", marginBottom: '15px'}}>Education</h2>)
+        for (let i = 0; i < this.state.obj.educations.length; i++) {
+          let currentEdu = this.state.obj.educations[i];
+          educations.push(<div key={i + 1}>
+            <h2 style={{fontSize: "20px", display: 'inline'}}>{currentEdu.school}</h2>
+            <h2 style={{fontSize: "20px", display: "inline", float: 'right'}}>{currentEdu.date}</h2>
+            <h3 style={{fontSize: "16px", fontWeight: '400'}}>{currentEdu.degree + ' ' + currentEdu.major}</h3>
+          </div>);
+        }
+      }
+      if (this.state.obj.hasOwnProperty("numJobs")) {
+        jobs.push(<h2 key={0} style={{fontSize: "28px", marginTop: "30px", marginBottom: "15px"}}>Work Experience</h2>)
+        for (let i = 0; i < this.state.obj.jobs.length; i++) {
+          const bulletPoints = [];
+          let currentJob = this.state.obj.jobs[i];
+          for (let j = 0; j < this.state.obj.jobs[i].bulletPoints.length; j++) {
+            let currentBulletPoint = this.state.obj.jobs[i].bulletPoints[j];
+            console.log(currentBulletPoint)
+            bulletPoints.push(<li key={j}>
+              {currentBulletPoint.bulletPoint}
+            </li>);
+          }
+          jobs.push(<div key={i + 1}>
+            <h2 style={{fontSize: "20px", display: 'inline'}}>{currentJob.title}</h2>
+            <h2 style={{fontSize: "20px", display: "inline", float: 'right'}}>{currentJob.startDate + ' - ' + currentJob.endDate}</h2>
+            <h3 style={{fontSize: "16px", fontWeight: '400'}}>{currentJob.company}</h3>
+            <ul>{bulletPoints}</ul>
+          </div>);
+        }
+      }
+    }
+
     return (
       <div>
         {this.state.showCV && 
         
-        <div>
-          <h1>{this.state.obj.name}</h1>
+        <div style={cvStyle}>
+          <h1 style={{textAlign: 'center'}}>{this.state.obj.name}</h1>
+          <h2 style={{textAlign: 'center', fontSize: "20px", fontWeight: '300'}}>{this.state.obj.email}</h2>
+          <h2 style={{textAlign: 'center', fontSize: "20px", fontWeight: '300', marginBottom: '30px', paddingBottom: "20px", borderBottom: "1px solid gray"}}>{this.state.obj.phone}</h2>
+          <div>
+            {educations}
+          </div>
+          <div>
+            {jobs}
+          </div>
         </div>
         
         }
