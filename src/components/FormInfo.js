@@ -62,15 +62,6 @@ export class FormInfo extends Component {
   }
 
   render() {
-
-    const formStyle = {
-      width: "700px",
-      margin: "50px auto",
-      border: "1px solid #dbdbdb",
-      borderRadius: "1px",
-      padding: "20px",
-    }
-
     const buttonStyle = {
       marginTop: "20px",
     }
@@ -103,7 +94,7 @@ export class FormInfo extends Component {
 
     return (
       <div>
-        <Form style={formStyle}>
+        <Form style={this.props.show()}>
           <h1 style={headerOneStyle}>CV Generator</h1>
           <h2 style={headerStyle}>Personal Information</h2>
           <FormGroup>
