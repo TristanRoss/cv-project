@@ -12,6 +12,7 @@ export class Education extends Component {
       school: "",
       degree: "",
       date: "",
+      key: this.props.number - 1,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -25,6 +26,8 @@ export class Education extends Component {
     this.setState({
       [name]: value
     });
+    
+    this.props.hIC(this.state);
   }
 
   

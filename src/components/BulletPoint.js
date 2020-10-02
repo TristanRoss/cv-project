@@ -9,7 +9,8 @@ export class BulletPoint extends Component {
   
 
     this.state = {
-      text: "",
+      bulletPoint: "",
+      key: this.props.number - 1,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -23,6 +24,7 @@ export class BulletPoint extends Component {
     this.setState({
       [name]: value
     });
+    this.props.hIC(this.state);
   }
 
   

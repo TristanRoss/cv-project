@@ -13,7 +13,9 @@ export class Job extends Component {
       title: "",
       startDate: "",
       endDate: "",
-      numBullets: 1
+      numBullets: 1,
+      bulletPoints: [],
+      key: this.props.number - 1,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -21,13 +23,22 @@ export class Job extends Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+    if (event.hasOwnProperty('bulletPoint')) {
+      const bullets = this.state.bulletPoints.slice();
+      bullets[event.key] = event;
+      this.setState({
+        bulletPoints: bullets 
+      });
+    } else {
+      const target = event.target;
+      const value = target.value;
+      const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
+      this.setState({
+        [name]: value
+      });
+    }
+    this.props.hIC(this.state);
   }
 
   addBulletPoint() {
@@ -42,7 +53,7 @@ export class Job extends Component {
     const bulletPoints = [];
 
     for (let i = 0; i < this.state.numBullets; i++) {
-      bulletPoints.push(<BulletPoint key={i} number={i + 1}></BulletPoint>)
+      bulletPoints.push(<BulletPoint key={i} hIC={this.handleInputChange} number={i + 1}></BulletPoint>)
     }
 
 

@@ -13,8 +13,9 @@ export class App extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    this.setState({showForm: !this.state.showForm})
+  handleClick(item) {
+    this.setState({showForm: !this.state.showForm});
+    console.log(item);
   }
 
   render() {
